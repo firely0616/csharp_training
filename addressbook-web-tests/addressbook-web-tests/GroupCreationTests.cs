@@ -41,7 +41,7 @@ namespace WebAddressbookTests
         }
 
         [Test]
-        public void TheUntitledTestCaseTest()
+        public void GroupCreationTest()
         {
             OpenHomePage();
             Login(new AccountData("admin", "secret"));
