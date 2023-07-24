@@ -9,7 +9,7 @@ using OpenQA.Selenium;
 using WebAddressbookTests;
 using OpenQA.Selenium.Support.UI;
 
-namespace addressbook_web_tests
+namespace WebAddressbookTests
 {
     public class TestBase
     {
