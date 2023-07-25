@@ -13,9 +13,9 @@ namespace WebAddressbookTests
         [Test]
         public void ContactCreationTest()
         {
-            OpenHomePage();
-            Login(new AccountData("admin", "secret"));
-            AddNewContact();
+            app.Navigator.OpenHomePage();
+            app.Auth.Login(new AccountData("admin", "secret"));
+            app.Navigator.AddNewContact();
             ContactData contact = new ContactData();
             contact.Firstname = "test1";
             contact.Middlename = "test1";
@@ -42,9 +42,9 @@ namespace WebAddressbookTests
             contact.Phone2 = "test1";
             contact.Notes = "test1";
             contact.Photo = "C:\\Users\\gohot\\2022-07-28.png";
-            FillContactForm(contact);
-            SubmitContactCreation();
-            ReturnToHomePage();
+            app.Contact.FillContactForm(contact);
+            app.Contact.SubmitContactCreation();
+            app.Navigator.ReturnToHomePage();
         }
 
        

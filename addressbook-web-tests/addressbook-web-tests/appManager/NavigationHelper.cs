@@ -1,0 +1,39 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using OpenQA.Selenium;
+
+namespace WebAddressbookTests
+{
+    public class NavigationHelper : HelperBase
+    {
+        public string baseURL;
+        public NavigationHelper(IWebDriver driver, string baseUrl) : base(driver)
+        {
+            this.baseURL = baseUrl;
+        }
+        public void OpenHomePage()
+        {
+            driver.Navigate().GoToUrl(baseURL);
+        }
+        public void AddNewContact()
+        {
+            driver.FindElement(By.LinkText("add new")).Click();
+        }
+        public void ReturnToHomePage()
+        {
+            driver.FindElement(By.LinkText("home page")).Click();
+        }
+        public void GoToGroupsPage()
+        {
+            driver.FindElement(By.XPath("//a[contains(text(),'groups')]")).Click();
+        }
+        public void ReturnToGroupsPage()
+        {
+            driver.FindElement(By.LinkText("group page")).Click();
+        }
+
+    }
+}
