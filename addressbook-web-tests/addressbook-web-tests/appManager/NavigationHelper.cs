@@ -10,9 +10,9 @@ namespace WebAddressbookTests
     public class NavigationHelper : HelperBase
     {
         public string baseURL;
-        public NavigationHelper(IWebDriver driver, string baseUrl) : base(driver)
+        public NavigationHelper(ApplicationManager manager, String baseURL) : base(manager)
         {
-            this.baseURL = baseUrl;
+            this.baseURL = baseURL;
         }
         public void OpenHomePage()
         {
