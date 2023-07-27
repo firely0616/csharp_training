@@ -26,6 +26,10 @@ namespace WebAddressbookTests
         {
             driver.FindElement(By.LinkText("home page")).Click();
         }
+        public void GoToHomePage()
+        {
+            driver.FindElement(By.LinkText("home")).Click();
+        }
         public void GoToGroupsPage()
         {
             driver.FindElement(By.XPath("//a[contains(text(),'groups')]")).Click();

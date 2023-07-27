@@ -76,7 +76,11 @@
     <Compile Include="appManager\LoginHelper.cs" />
     <Compile Include="appManager\NavigationHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="tests\ContactModificationTests.cs" />
+    <Compile Include="tests\ContactRemovalTests.cs" />
     <Compile Include="tests\GroupCreationTests.cs" />
+    <Compile Include="tests\GroupModifacationTests.cs" />
+    <Compile Include="tests\GroupRemovalTests.cs" />
     <Compile Include="tests\TestBase.cs" />
   </ItemGroup>
   <ItemGroup>
