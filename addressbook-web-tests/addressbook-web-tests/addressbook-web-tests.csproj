@@ -70,6 +70,7 @@
     <Compile Include="model\ContactData.cs" />
     <Compile Include="appManager\ContactHelper.cs" />
     <Compile Include="model\GroupData.cs" />
+    <Compile Include="tests\AuthTestBase.cs" />
     <Compile Include="tests\ContactCreationTests.cs" />
     <Compile Include="appManager\GroupHelper.cs" />
     <Compile Include="appManager\HelperBase.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="tests\GroupCreationTests.cs" />
     <Compile Include="tests\GroupModifacationTests.cs" />
     <Compile Include="tests\GroupRemovalTests.cs" />
+    <Compile Include="tests\LoginTests.cs" />
     <Compile Include="tests\TestBase.cs" />
   </ItemGroup>
   <ItemGroup>

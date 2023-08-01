@@ -20,7 +20,22 @@ namespace WebAddressbookTests
             this.manager = manager;
             driver = manager.Driver;  
         }
-        private bool IsElementPresent(By by)
+
+        public void Type(By locator, string text)
+        {
+            if (text != null)
+            {
+                driver.FindElement(locator).Clear();
+                driver.FindElement(locator).SendKeys(text);
+            }
+        }
+
+        public void TypeDate(By locator, string date) {
+            new SelectElement(driver.FindElement(locator)).SelectByText(date);
+            driver.FindElement(By.XPath("//option[@value='" + date + "']")).Click();
+        }
+
+        public bool IsElementPresent(By by)
         {
             try
             {
@@ -33,7 +48,7 @@ namespace WebAddressbookTests
             }
         }
 
-        private bool IsAlertPresent()
+        public bool IsAlertPresent()
         {
             try
             {
@@ -46,7 +61,7 @@ namespace WebAddressbookTests
             }
         }
 
-        private string CloseAlertAndGetItsText()
+        public string CloseAlertAndGetItsText()
         {
             try
             {
