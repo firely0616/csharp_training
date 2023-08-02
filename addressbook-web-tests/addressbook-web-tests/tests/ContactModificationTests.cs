@@ -40,7 +40,21 @@ namespace WebAddressbookTests.tests
             contact.Phone2 = "testUpdate";
             contact.Notes = "testUpdate";
             app.Navigator.GoToHomePage();
-            app.Contact.Modificate(1, contact);
+            if (app.Contact.IsContactPresent()) 
+            {
+                app.Contact.Modificate(1, contact);
+            }
+            else
+            {
+                ContactData contactForModificate = new ContactData();
+                contactForModificate.Firstname = "test";
+                contactForModificate.Middlename = "test";
+                contactForModificate.Lastname = "test";
+                app.Contact.Create(contactForModificate);
+                app.Navigator.ReturnToHomePage();
+                app.Contact.Modificate(1, contact);
+            }
+            
             app.Navigator.ReturnToHomePage();
         }
     }

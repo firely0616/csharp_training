@@ -14,7 +14,20 @@ namespace WebAddressbookTests.tests
         public void GroupRemovalTest() { 
 
             app.Navigator.GoToGroupsPage();
-            app.Group.Remove(1);
+            if(app.Group.IsGroupPresent())
+            {
+                app.Group.Remove(1);
+            }
+            else 
+            {
+                GroupData groupForRemove = new GroupData();
+                groupForRemove.Name = "test name";
+                groupForRemove.Header = "test header";
+                groupForRemove.Footer = "test footer";
+                app.Group.Create(groupForRemove);
+                app.Navigator.ReturnToGroupsPage();
+                app.Group.Remove(1);
+            }          
             app.Navigator.ReturnToGroupsPage();
         }
 

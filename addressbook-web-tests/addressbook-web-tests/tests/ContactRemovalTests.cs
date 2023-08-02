@@ -14,7 +14,21 @@ namespace WebAddressbookTests.tests
         public void ContactRemovalTest()
         {
             app.Navigator.GoToHomePage();
-            app.Contact.Remove(1);
+            if (app.Contact.IsContactPresent())
+            {
+                app.Contact.Remove(1);
+            }
+            else
+            {
+                ContactData contactForRemove = new ContactData();
+                contactForRemove.Firstname = "test";
+                contactForRemove.Middlename = "test";
+                contactForRemove.Lastname = "test";
+                app.Contact.Create(contactForRemove);
+                app.Navigator.ReturnToHomePage();
+                app.Contact.Remove(1);
+            }
+            
             app.Navigator.GoToHomePage();
         }
     }

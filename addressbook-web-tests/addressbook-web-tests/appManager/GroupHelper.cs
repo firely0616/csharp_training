@@ -22,53 +22,20 @@ namespace WebAddressbookTests
             return this;
         }
         public GroupHelper Remove(int groupId)
-        {
-            if (IsGroupPresent()) 
-            {
+        {          
                 SelectGroup(groupId);
                 driver.FindElement(By.Name("delete")).Click();
                 return this;
-            }
-            else 
-            {
-                GroupData groupForRemove = new GroupData();
-                groupForRemove.Name = "test name";
-                groupForRemove.Header = "test header";
-                groupForRemove.Footer = "test footer";
-                Create(groupForRemove);
-                driver.FindElement(By.LinkText("group page")).Click();
-                SelectGroup(groupId);
-                driver.FindElement(By.Name("delete")).Click();
-                return this;
-            }
-            
         }
        
         public GroupHelper Modificate(int groupId, GroupData group)
         {
-            if (IsGroupPresent())
-            {
+           
                 SelectGroup(groupId);
                 driver.FindElement(By.Name("edit")).Click();
                 FillGroupForm(group);
                 driver.FindElement(By.Name("update")).Click();
-                return this;
-            }
-            else
-            {
-                GroupData groupForModificate = new GroupData();
-                groupForModificate.Name = "test name";
-                groupForModificate.Header = "test header";
-                groupForModificate.Footer = "test footer";
-                Create(groupForModificate);
-                driver.FindElement(By.LinkText("group page")).Click();
-                SelectGroup(groupId);
-                driver.FindElement(By.Name("edit")).Click();
-                FillGroupForm(group);
-                driver.FindElement(By.Name("update")).Click();
-                return this;
-            }
-
+                return this;         
         }
         public bool IsGroupPresent()
         {

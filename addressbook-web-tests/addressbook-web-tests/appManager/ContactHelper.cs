@@ -25,50 +25,20 @@ namespace WebAddressbookTests
 
         public ContactHelper Remove(int contactId)
         {
-            if (IsContactPresent())
-            {
-                SelectContact(contactId);
-                driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
-                driver.SwitchTo().Alert().Accept();
-                return this;
-            }
-            else
-            {
-                ContactData contactForRemove = new ContactData();
-                contactForRemove.Firstname = "test1";
-                contactForRemove.Middlename = "test1";
-                contactForRemove.Lastname = "test1";
-                Create(contactForRemove);
-                SelectContact(contactId);
-                driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
-                driver.SwitchTo().Alert().Accept();
-                return this;
-            }
             
+                SelectContact(contactId);
+                driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+                driver.SwitchTo().Alert().Accept();
+                return this;       
         }
       
 
         public ContactHelper Modificate(int contactId, ContactData contact)
-        {
-            if (IsContactPresent())
-            {
+        {         
                 SelectContactForModificate(contactId);
                 FillContactForm(contact);
                 driver.FindElement(By.Name("update")).Click();
-                return this;
-            }
-            else
-            {
-                ContactData contactForModificate = new ContactData();
-                contactForModificate.Firstname = "test1";
-                contactForModificate.Middlename = "test1";
-                contactForModificate.Lastname = "test1";
-                Create(contactForModificate);
-                SelectContactForModificate(contactId);
-                FillContactForm(contact);
-                driver.FindElement(By.Name("update")).Click();
-                return this;
-            }
+                return this;         
         }
         public bool IsContactPresent()
         {

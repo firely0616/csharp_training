@@ -18,7 +18,21 @@ namespace WebAddressbookTests.tests
             group.Header = "test header update";
             group.Footer = "test footer update";
             app.Navigator.GoToGroupsPage();
-            app.Group.Modificate(1, group);
+            if (app.Contact.IsContactPresent())
+            {
+                app.Group.Modificate(1, group);
+            }
+            else
+            {
+                GroupData groupForModificate = new GroupData();
+                groupForModificate.Name = "test name";
+                groupForModificate.Header = "test header";
+                groupForModificate.Footer = "test footer";
+                app.Group.Create(groupForModificate);
+                app.Navigator.ReturnToGroupsPage();
+                app.Group.Modificate(1, group);
+            }
+            
             app.Navigator.ReturnToGroupsPage();
 
         }
