@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -15,14 +16,17 @@ namespace WebAddressbookTests.tests
         [Test]
         public void GroupCreationTest()
         {
-            GroupData group = new GroupData();
-            group.Name = "test name";
+            GroupData group = new GroupData("test name");            
             group.Header = "test header";
             group.Footer = "test footer";
-           
+            List<GroupData> oldGroups = app.Group.GetGroupList();
             app.Group.Create(group);
             app.Navigator.ReturnToGroupsPage();
-            
+            List<GroupData> newGroups = app.Group.GetGroupList();
+            oldGroups.Add(group);
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
         }
 
        

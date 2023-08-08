@@ -45,6 +45,21 @@ namespace WebAddressbookTests
             return IsElementPresent(By.XPath("//tr[@class = 'odd' or @name = 'entry']"));
         }
 
+        public List<ContactData> GetContactList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            manager.Navigator.GoToHomePage();
+            ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@class = 'odd' or @name = 'entry']"));  
+            int count = 0;
+            foreach (IWebElement element in elements)
+            {
+                count++;            
+                contacts.Add(new ContactData(element.FindElement(By.XPath("//tr[@class = 'odd' or @name = 'entry'][" + count + "]//td[2]")).Text,
+                    element.FindElement(By.XPath("//tr[@class = 'odd' or @name = 'entry'][" + count + "]//td[3]")).Text));
+            }
+            return contacts;
+        }
+
         public void SelectContact(int contactId)
         {
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + contactId + "]")).Click();

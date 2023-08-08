@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -13,10 +15,8 @@ namespace WebAddressbookTests.tests
         [Test]
         public void ContactCreationTest()
         {
-            ContactData contact = new ContactData();
-            contact.Firstname = "test1";
-            contact.Middlename = "test1";
-            contact.Lastname = "test1";
+            ContactData contact = new ContactData("test1", "test1");           
+            contact.Middlename = "test1";           
             contact.Nickname = "test1";
             contact.Title = "test1";
             contact.Company = "test1";
@@ -39,15 +39,22 @@ namespace WebAddressbookTests.tests
             contact.Phone2 = "test1";
             contact.Notes = "test1";
             contact.Photo = "C:\\Users\\gohot\\2022-07-28.png";
+            List<ContactData> oldContacts = app.Contact.GetContactList();
             app.Contact.Create(contact);
             app.Navigator.ReturnToHomePage();
+            List<ContactData> newContacts = app.Contact.GetContactList();
+            oldContacts.Add(contact);
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
+
         }
 
-       
-
-     
 
 
-      
+
+
+
+
     }
 }

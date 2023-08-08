@@ -14,14 +14,14 @@ namespace WebAddressbookTests.tests
         public void GroupRemovalTest() { 
 
             app.Navigator.GoToGroupsPage();
-            if(app.Group.IsGroupPresent())
+            List<GroupData> oldGroups = app.Group.GetGroupList();
+            if (app.Group.IsGroupPresent())
             {
                 app.Group.Remove(1);
             }
             else 
             {
-                GroupData groupForRemove = new GroupData();
-                groupForRemove.Name = "test name";
+                GroupData groupForRemove = new GroupData("test name");
                 groupForRemove.Header = "test header";
                 groupForRemove.Footer = "test footer";
                 app.Group.Create(groupForRemove);
@@ -29,6 +29,10 @@ namespace WebAddressbookTests.tests
                 app.Group.Remove(1);
             }          
             app.Navigator.ReturnToGroupsPage();
+            List<GroupData> newGroups = app.Group.GetGroupList();
+            oldGroups.RemoveAt(0);
+            Assert.AreEqual(oldGroups, newGroups);
+
         }
 
     }

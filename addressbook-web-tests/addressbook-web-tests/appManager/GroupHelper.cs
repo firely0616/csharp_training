@@ -42,6 +42,18 @@ namespace WebAddressbookTests
             return IsElementPresent(By.XPath("//span[@class = 'group']"));
         }
 
+        public List<GroupData> GetGroupList()
+        {
+            List<GroupData> groups = new List<GroupData>();
+            manager.Navigator.GoToGroupsPage();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+            foreach (IWebElement element in elements)
+            {            
+                groups.Add(new GroupData(element.Text));
+            }
+            return groups;
+        }
+
         public void SelectGroup(int groupId) {
             driver.FindElement(By.XPath("(//input[@name='selected[]'])["+groupId+"]")).Click(); 
         }
@@ -59,9 +71,9 @@ namespace WebAddressbookTests
 
         public GroupHelper FillGroupForm(GroupData groupData)
         {
-            Type(By.Name("group_name"), "test");
-            Type(By.Name("group_header"), "test");
-            Type(By.Name("group_footer"), "test");
+            Type(By.Name("group_name"), groupData.Name);
+            Type(By.Name("group_header"), groupData.Header);
+            Type(By.Name("group_footer"), groupData.Footer);
             return this;
         }
 

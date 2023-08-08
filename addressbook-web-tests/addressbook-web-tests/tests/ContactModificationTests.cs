@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
@@ -14,10 +15,8 @@ namespace WebAddressbookTests.tests
         [Test]
         public void ContactModifitacionTest()
         {
-            ContactData contact = new ContactData();
-            contact.Firstname = "testUpdate";
+            ContactData contact = new ContactData("NEWCONTACT", "NEWCONTACT");
             contact.Middlename = "testUpdate";
-            contact.Lastname = "testUpdate";
             contact.Nickname = "testUpdate";
             contact.Title = "testUpdate";
             contact.Company = "testUpdate";
@@ -40,22 +39,26 @@ namespace WebAddressbookTests.tests
             contact.Phone2 = "testUpdate";
             contact.Notes = "testUpdate";
             app.Navigator.GoToHomePage();
+            List<ContactData> oldContacts = app.Contact.GetContactList();
             if (app.Contact.IsContactPresent()) 
             {
                 app.Contact.Modificate(1, contact);
             }
             else
             {
-                ContactData contactForModificate = new ContactData();
-                contactForModificate.Firstname = "test";
-                contactForModificate.Middlename = "test";
-                contactForModificate.Lastname = "test";
+                ContactData contactForModificate = new ContactData("test", "test");
                 app.Contact.Create(contactForModificate);
                 app.Navigator.ReturnToHomePage();
                 app.Contact.Modificate(1, contact);
-            }
-            
+            }          
             app.Navigator.ReturnToHomePage();
+            List<ContactData> newContacts = app.Contact.GetContactList();
+            oldContacts[0].Lastname = contact.Lastname;
+            oldContacts[0].Firstname = contact.Firstname;
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
+
         }
     }
 }

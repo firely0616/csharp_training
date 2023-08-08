@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
@@ -14,22 +15,23 @@ namespace WebAddressbookTests.tests
         public void ContactRemovalTest()
         {
             app.Navigator.GoToHomePage();
+            List<ContactData> oldContacts = app.Contact.GetContactList();
             if (app.Contact.IsContactPresent())
             {
                 app.Contact.Remove(1);
             }
             else
             {
-                ContactData contactForRemove = new ContactData();
-                contactForRemove.Firstname = "test";
-                contactForRemove.Middlename = "test";
-                contactForRemove.Lastname = "test";
+                ContactData contactForRemove = new ContactData("test","test");
                 app.Contact.Create(contactForRemove);
                 app.Navigator.ReturnToHomePage();
                 app.Contact.Remove(1);
-            }
-            
+            }          
             app.Navigator.GoToHomePage();
+            List<ContactData> newContacts = app.Contact.GetContactList();
+            oldContacts.RemoveAt(0);
+            Assert.AreEqual(oldContacts, newContacts);
+
         }
     }
 }
