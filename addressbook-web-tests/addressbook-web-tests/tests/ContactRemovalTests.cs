@@ -25,11 +25,15 @@ namespace WebAddressbookTests.tests
                 ContactData contactForRemove = new ContactData("test","test");
                 app.Contact.Create(contactForRemove);
                 app.Navigator.ReturnToHomePage();
-                app.Contact.Remove(1);
-            }          
+                app.Contact.Remove(1);               
+            }
+            System.Threading.Thread.Sleep(2000);
             app.Navigator.GoToHomePage();
             List<ContactData> newContacts = app.Contact.GetContactList();
-            oldContacts.RemoveAt(0);
+            if (oldContacts.Count>0) 
+            {
+                oldContacts.RemoveAt(0);
+            }          
             Assert.AreEqual(oldContacts, newContacts);
 
         }

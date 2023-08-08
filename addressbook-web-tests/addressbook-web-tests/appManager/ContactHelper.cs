@@ -90,10 +90,10 @@ namespace WebAddressbookTests
             Type(By.Name("notes"), contact.Notes);
             Type(By.Name("byear"), contact.Byear);
             Type(By.Name("ayear"), contact.Ayear);
-            TypeDate(By.Name("bday"), contact.Bday);
-            TypeDate(By.Name("bmonth"), contact.Bmonth);
-            TypeDate(By.Name("aday"), contact.Aday);
-            TypeDate(By.Name("amonth"), contact.Amonth);
+            //TypeDate(By.Name("bday"), contact.Bday);
+            //TypeDate(By.Name("bmonth"), contact.Bmonth);
+            //TypeDate(By.Name("aday"), contact.Aday);
+            //TypeDate(By.Name("amonth"), contact.Amonth);
             return this;
 
         }

@@ -30,7 +30,10 @@ namespace WebAddressbookTests.tests
             }          
             app.Navigator.ReturnToGroupsPage();
             List<GroupData> newGroups = app.Group.GetGroupList();
-            oldGroups.RemoveAt(0);
+            if (oldGroups.Count>0)
+            {
+                oldGroups.RemoveAt(0);
+            }          
             Assert.AreEqual(oldGroups, newGroups);
 
         }
