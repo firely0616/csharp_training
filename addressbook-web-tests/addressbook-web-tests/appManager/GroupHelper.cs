@@ -18,40 +18,69 @@ namespace WebAddressbookTests
             manager.Navigator.GoToGroupsPage();
             InitGroupCreation();
             FillGroupForm(group);
-            SubmitGroupCreation(); 
+            SubmitGroupCreation();
             return this;
         }
         public GroupHelper Remove(int groupId)
-        {          
-                SelectGroup(groupId);
-                driver.FindElement(By.Name("delete")).Click();
-                return this;
+        {
+            SelectGroup(groupId);
+            RemoveGroup();
+            return this;
         }
-       
+        public void RemoveGroup() 
+        {
+            driver.FindElement(By.Name("delete")).Click();
+            groupChache = null;
+        }
+
         public GroupHelper Modificate(int groupId, GroupData group)
         {
-           
-                SelectGroup(groupId);
-                driver.FindElement(By.Name("edit")).Click();
-                FillGroupForm(group);
-                driver.FindElement(By.Name("update")).Click();
-                return this;         
+
+            SelectGroup(groupId);
+            InitGroupModification();
+            FillGroupForm(group);
+            SubmitGroupModification();
+            return this;
         }
+        public void InitGroupModification() 
+        {
+            driver.FindElement(By.Name("edit")).Click();
+        }
+        public void SubmitGroupModification()
+        {
+            driver.FindElement(By.Name("update")).Click();
+            groupChache = null;
+        }
+
         public bool IsGroupPresent()
         {
             return IsElementPresent(By.XPath("//span[@class = 'group']"));
         }
 
+        private List<GroupData> groupChache = null;
+
         public List<GroupData> GetGroupList()
         {
-            List<GroupData> groups = new List<GroupData>();
-            manager.Navigator.GoToGroupsPage();
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
-            foreach (IWebElement element in elements)
-            {            
-                groups.Add(new GroupData(element.Text));
+            if (groupChache == null)
+            {
+                groupChache = new List<GroupData>();
+                manager.Navigator.GoToGroupsPage();
+                ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+                foreach (IWebElement element in elements)
+                {
+                    
+                    groupChache.Add(new GroupData(element.Text)
+                    {
+                        Id = element.FindElement(By.TagName("input")).GetAttribute("value")
+                    });
+                }
             }
-            return groups;
+            return new List<GroupData>(groupChache);
+
+        }
+        public int GetGroupCount()
+        {
+            return driver.FindElements(By.CssSelector("span.group")).Count();
         }
 
         public void SelectGroup(int groupId) {
@@ -66,6 +95,7 @@ namespace WebAddressbookTests
         {
             driver.FindElement(By.Id("content")).Click();
             driver.FindElement(By.Name("submit")).Click();
+            groupChache = null;
             return this;
         }
 

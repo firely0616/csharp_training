@@ -52,6 +52,7 @@ namespace WebAddressbookTests.tests
                 app.Contact.Modificate(1, contact);
             }          
             app.Navigator.ReturnToHomePage();
+            Assert.AreEqual(oldContacts.Count, app.Contact.GetContactCount());
             List<ContactData> newContacts = app.Contact.GetContactList();
             oldContacts[0].Lastname = contact.Lastname;
             oldContacts[0].Firstname = contact.Firstname;

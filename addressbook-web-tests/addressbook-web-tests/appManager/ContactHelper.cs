@@ -27,37 +27,56 @@ namespace WebAddressbookTests
         {
             
                 SelectContact(contactId);
-                driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
-                driver.SwitchTo().Alert().Accept();
+                SubmitContactRemove();
                 return this;       
         }
       
-
+        public void SubmitContactRemove()
+        {
+            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            driver.SwitchTo().Alert().Accept();
+            contactChache = null;
+        }
         public ContactHelper Modificate(int contactId, ContactData contact)
         {         
                 SelectContactForModificate(contactId);
                 FillContactForm(contact);
-                driver.FindElement(By.Name("update")).Click();
+                SubmitContactModificate();
                 return this;         
+        }
+        public void SubmitContactModificate()
+        {
+            driver.FindElement(By.Name("update")).Click();
+            contactChache = null;
         }
         public bool IsContactPresent()
         {
             return IsElementPresent(By.XPath("//tr[@class = 'odd' or @name = 'entry']"));
         }
 
+        private List<ContactData> contactChache = null;
+
         public List<ContactData> GetContactList()
         {
-            List<ContactData> contacts = new List<ContactData>();
-            manager.Navigator.GoToHomePage();
-            ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@class = 'odd' or @name = 'entry']"));  
-            int count = 0;
-            foreach (IWebElement element in elements)
+            if (contactChache == null)
             {
-                count++;            
-                contacts.Add(new ContactData(element.FindElement(By.XPath("//tr[@class = 'odd' or @name = 'entry'][" + count + "]//td[2]")).Text,
-                    element.FindElement(By.XPath("//tr[@class = 'odd' or @name = 'entry'][" + count + "]//td[3]")).Text));
+                contactChache = new List<ContactData>();
+                manager.Navigator.GoToHomePage();
+                ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@class = 'odd' or @name = 'entry']"));
+                int count = 0;
+                foreach (IWebElement element in elements)
+                {
+                    count++;
+                    contactChache.Add(new ContactData(element.FindElement(By.XPath("//tr[@class = 'odd' or @name = 'entry'][" + count + "]//td[2]")).Text,
+                        element.FindElement(By.XPath("//tr[@class = 'odd' or @name = 'entry'][" + count + "]//td[3]")).Text));
+                }
             }
-            return contacts;
+            return new List<ContactData>(contactChache);
+        }
+
+        public int GetContactCount() 
+        {
+        return driver.FindElements(By.XPath("//tr[@class = 'odd' or @name = 'entry']")).Count;
         }
 
         public void SelectContact(int contactId)
@@ -100,6 +119,7 @@ namespace WebAddressbookTests
         public ContactHelper SubmitContactCreation()
         {
             driver.FindElement(By.XPath("//input[contains(@value, 'Enter')]")).Click();
+            contactChache = null;
             return this;
         }
 

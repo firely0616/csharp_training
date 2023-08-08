@@ -8,36 +8,13 @@ namespace WebAddressbookTests
 {
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
-        private string firstname;
-        private string middlename;
-        private string lastname;
-        private string nickname;
-        private string title;
-        private string company;
-        private string address;
-        private string home;
-        private string mobile;
-        private string work;
-        private string fax;
-        private string email;
-        private string email2;
-        private string email3;
-        private string homepage;
-        private string bday;
-        private string bmonth;
-        private string byear;
-        private string aday;
-        private string amonth;
-        private string ayear;
-        private string address2;
-        private string phone2;
-        private string notes;
-        private string photo;
+        
+      
 
         public ContactData(string lastname, string firstname) 
         {
-            this.lastname = lastname;
-            this.firstname = firstname;          
+            Lastname = lastname;
+            Firstname = firstname;          
         }
         public bool Equals(ContactData other)
         {
@@ -49,16 +26,16 @@ namespace WebAddressbookTests
             {
                 return true;
             }
-            return firstname == other.firstname && lastname == other.lastname;
+            return Firstname == other.Firstname && Lastname == other.Lastname;
         }
         public override int GetHashCode()
         {
-            return lastname.GetHashCode() + firstname.GetHashCode();
+            return Lastname.GetHashCode() + Firstname.GetHashCode();
         }
 
         public override string ToString()
         {
-            return "lastname = " + lastname + " firstname = " + firstname;
+            return "lastname = " + Lastname + " firstname = " + Firstname;
         }
 
         public int CompareTo(ContactData other)
@@ -78,127 +55,128 @@ namespace WebAddressbookTests
 
         public string Firstname
         {
-            get { return firstname; }
-            set { firstname = value; }
+            get; set;
         }
         public string Photo
         {
-            get { return photo; }
-            set { photo = value; }
+            get; set;
+
         }
         public string Homepage
         {
-            get { return homepage; }
-            set { homepage = value; }
+            get; set;
+
         }
         public string Email
         {
-            get { return email; }
-            set { email = value; }
+            get; set;
+
         }
         public string Email2
         {
-            get { return email2; }
-            set { email2 = value; }
+            get; set;
+
         }
         public string Email3
         {
-            get { return email3; }
-            set { email3 = value; }
+            get; set;
+
         }
         public string Work
         {
-            get { return work; }
-            set { work = value; }
+            get; set;
+
         }
         public string Fax
         {
-            get { return fax; }
-            set { fax = value; }
+            get; set;
+
         }
         public string Mobile
         {
-            get { return mobile; }
-            set { mobile = value; }
+            get; set;
+
         }
         public string Middlename
         {
-            get { return middlename; }
-            set { middlename = value; }
+            get; set;
+
         }
         public string Nickname
         {
-            get { return nickname; }
-            set { nickname = value; }
+            get; set;
+
         }
         public string Lastname
         {
-            get { return lastname; }   
-            set { lastname = value; }
+            get; set;
+
         }
         public string Title
-        { get { return title; } set {  title = value; } }
+        {
+            get; set;
+        }
         public string Company
         {
-            get { return company; }
-            set { company = value; }
+            get; set;
+
         }
         public string Address
         {
-            get { return address; }
-            set { address = value; }
+            get; set;
+
         }
-        public string Home { 
-            get { return home; }
-            set { home = value; }
+        public string Home {
+            get; set;
+
         }
         public string Bday
         {
-            get { return bday; }
-            set { bday = value; }
+            get; set;
+
         }
         public string Bmonth
         {
-            get { return bmonth; }
-            set { bmonth = value; }
+            get; set;
+
         }
         public string Byear
         {
-            get { return byear; }
-            set { byear = value; }
+            get; set;
+
         }
         public string Aday
         {
-            get { return aday; }
-            set { aday = value; }
+            get; set;
+
         }
         public string Amonth
         {
-            get { return amonth; }
-            set { amonth = value; }
+            get; set;
+
         }
         public string Ayear
         {
-            get { return ayear; }
-            set { ayear = value; }
+            get; set;
+
         }
         public string Address2
         {
-            get { return address2; }
-            set { address2 = value; }
+            get; set;
+
         }
         public string Phone2
         {
-            get { return phone2; }
-            set { phone2 = value; }
+            get; set;
+
         }
         public string Notes
         {
-            get {return notes;}
-            set { notes = value; }
+            get; set;
+
         }
 
-        
+
 
     }
 }

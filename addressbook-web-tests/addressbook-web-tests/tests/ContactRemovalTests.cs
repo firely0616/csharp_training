@@ -29,6 +29,14 @@ namespace WebAddressbookTests.tests
             }
             System.Threading.Thread.Sleep(2000);
             app.Navigator.GoToHomePage();
+            if (oldContacts.Count <= 0)
+            {
+                Assert.AreEqual(oldContacts.Count, app.Contact.GetContactCount());
+            }
+            else
+            {
+                Assert.AreEqual(oldContacts.Count - 1, app.Contact.GetContactCount());
+            }
             List<ContactData> newContacts = app.Contact.GetContactList();
             if (oldContacts.Count>0) 
             {

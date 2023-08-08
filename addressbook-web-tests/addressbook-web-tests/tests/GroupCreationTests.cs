@@ -22,6 +22,7 @@ namespace WebAddressbookTests.tests
             List<GroupData> oldGroups = app.Group.GetGroupList();
             app.Group.Create(group);
             app.Navigator.ReturnToGroupsPage();
+            Assert.AreEqual(oldGroups.Count+1, app.Group.GetGroupCount());
             List<GroupData> newGroups = app.Group.GetGroupList();
             oldGroups.Add(group);
             oldGroups.Sort();

@@ -29,6 +29,14 @@ namespace WebAddressbookTests.tests
                 app.Group.Remove(1);
             }          
             app.Navigator.ReturnToGroupsPage();
+            if (oldGroups.Count<=0)
+            {
+                Assert.AreEqual(oldGroups.Count, app.Group.GetGroupCount());
+            }
+            else
+            {
+                Assert.AreEqual(oldGroups.Count - 1, app.Group.GetGroupCount());
+            }
             List<GroupData> newGroups = app.Group.GetGroupList();
             if (oldGroups.Count>0)
             {
