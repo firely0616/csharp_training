@@ -44,13 +44,28 @@ namespace WebAddressbookTests
             {
                 return 1;
             }
-            if (Lastname.CompareTo(other.Lastname) == 0 && Firstname.CompareTo(other.Firstname) == 0)
+            if (Lastname.CompareTo(other.Lastname) == 0)
             {
-                return 0;
+                if (Firstname.CompareTo(other.Firstname) == 1)
+                {
+                    return 1;
+                }
+                if (Firstname.CompareTo(other.Firstname) == -1)
+                {
+                    return -1;
+                }
+                if (Firstname.CompareTo(other.Firstname) == 0)
+                {
+                    return 0;
+                }
             }
             else
+            {
                 return -1;
-            
+            }
+
+                throw new ArgumentException(String.Format("error"));
+
         }
 
         public string Firstname
