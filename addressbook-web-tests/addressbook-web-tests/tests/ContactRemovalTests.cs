@@ -27,7 +27,7 @@ namespace WebAddressbookTests.tests
                 app.Navigator.ReturnToHomePage();
                 app.Contact.Remove(1);               
             }
-            System.Threading.Thread.Sleep(2000);
+            System.Threading.Thread.Sleep(1000);
             app.Navigator.GoToHomePage();
             if (oldContacts.Count <= 0)
             {

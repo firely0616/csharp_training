@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -15,7 +16,7 @@ namespace WebAddressbookTests.tests
         [Test]
         public void ContactCreationTest()
         {
-            ContactData contact = new ContactData("test1", "test1");           
+            ContactData contact = new ContactData("lastname", "firstname");           
             contact.Middlename = "test1";           
             contact.Nickname = "test1";
             contact.Title = "test1";
@@ -44,18 +45,16 @@ namespace WebAddressbookTests.tests
             app.Navigator.ReturnToHomePage();
             Assert.AreEqual(oldContacts.Count+1, app.Contact.GetContactCount());
             List<ContactData> newContacts = app.Contact.GetContactList();
-            oldContacts.Add(contact);
-            oldContacts.Sort();
+            List<ContactData> oldContactsCopy = new List<ContactData>();
+            oldContactsCopy.Add(contact);
+            foreach (ContactData cont in oldContacts) 
+                {
+                    oldContactsCopy.Add(cont);
+                }
+            oldContactsCopy.Sort();
             newContacts.Sort();
-            Assert.AreEqual(oldContacts, newContacts);
+            Assert.AreEqual(oldContactsCopy, newContacts);
 
         }
-
-
-
-
-
-
-
     }
 }

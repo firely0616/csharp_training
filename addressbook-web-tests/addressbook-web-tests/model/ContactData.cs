@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace WebAddressbookTests
 {
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
-        
-      
+        public string allPhones;
 
         public ContactData(string lastname, string firstname) 
         {
@@ -52,9 +52,6 @@ namespace WebAddressbookTests
             {
                 return -1;
             }
-
-                throw new ArgumentException(String.Format("error"));
-
         }
 
         public string Firstname
@@ -178,6 +175,35 @@ namespace WebAddressbookTests
         {
             get; set;
 
+        }
+        public string AllPhones
+        {
+            get 
+            {
+                if (allPhones != null)
+                {
+                    return allPhones;
+                }
+                else
+                {
+                    return (CleanUp(Home) + CleanUp(Mobile) + CleanUp(Work) + CleanUp(Phone2)).Trim();
+                }
+            }
+
+            set 
+            {
+                allPhones = value;
+            }
+
+        }
+
+        public string CleanUp(string phone)
+        {
+            if (phone == null || phone == "") 
+            {
+                return "";
+            }
+            return Regex.Replace(phone, "[ -()]", "") + "\r\n";
         }
 
 

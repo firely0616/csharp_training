@@ -26,7 +26,7 @@ namespace WebAddressbookTests
 
         private ApplicationManager() {
             driver = new FirefoxDriver();
-            baseURL = "https://localhost/addressbook/";
+            baseURL = "http://localhost/addressbook/";
             verificationErrors = new StringBuilder();
             loginHelper = new LoginHelper(this);
             navigationHelper = new NavigationHelper(this, baseURL);
