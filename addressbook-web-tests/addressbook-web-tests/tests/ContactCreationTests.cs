@@ -30,16 +30,9 @@ namespace WebAddressbookTests.tests
             contact.Email2 = "test1";
             contact.Email3 = "test1";
             contact.Homepage = "test1";
-            contact.Bday = "15";
-            contact.Bmonth = "December";
-            contact.Byear = "2001";
-            contact.Aday = "11";
-            contact.Amonth = "November";
-            contact.Ayear = "1999";
             contact.Address2 = "test1";
             contact.Phone2 = "test1";
             contact.Notes = "test1";
-            contact.Photo = "C:\\Users\\gohot\\2022-07-28.png";
             List<ContactData> oldContacts = app.Contact.GetContactList();
             app.Contact.Create(contact);
             app.Navigator.ReturnToHomePage();

@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 
 namespace WebAddressbookTests
@@ -61,6 +65,24 @@ namespace WebAddressbookTests
             string text = driver.FindElement(By.XPath("//label//span")).Text;           
             return Int32.Parse(text);
         }
+
+        public void GoToContactDetails(int index)
+        {
+            manager.Navigator.GoToHomePage();
+            driver.FindElement(By.XPath("(//form[@name='MainForm']//img[@title='Details'])["+index+"]")).Click();
+        }
+
+        public ContactData GetContactInformationFromDetails(int index)
+        {
+            manager.Navigator.GoToHomePage();
+            GoToContactDetails(index);
+            string info = driver.FindElement(By.XPath("//div[@id = 'content']")).Text;
+            return new ContactData()
+            {
+                AllInfo = info
+            };
+        }
+
         public ContactData GetContactInformationFromTable(int index)
         {
             manager.Navigator.GoToHomePage();
@@ -80,23 +102,47 @@ namespace WebAddressbookTests
         public ContactData GetContactInformationFromEditForm(int index)
         {
             manager.Navigator.GoToHomePage();
-            SelectContactForModificate(index);
+            SelectContactForModificate(index);          
             string firstname = driver.FindElement(By.Name("firstname")).GetAttribute("value");
+            string middlename = driver.FindElement(By.Name("middlename")).GetAttribute("value");
             string lastname = driver.FindElement(By.Name("lastname")).GetAttribute("value");
             string address = driver.FindElement(By.Name("address")).GetAttribute("value");
             string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
             string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
             string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
             string phone2 = driver.FindElement(By.Name("phone2")).GetAttribute("value");
+            string nickname = driver.FindElement(By.Name("nickname")).GetAttribute("value");
+            string company = driver.FindElement(By.Name("company")).GetAttribute("value");
+            string title = driver.FindElement(By.Name("title")).GetAttribute("value");
+            string fax = driver.FindElement(By.Name("fax")).GetAttribute("value");
+            string email = driver.FindElement(By.Name("email")).GetAttribute("value");
+            string email2 = driver.FindElement(By.Name("email2")).GetAttribute("value");
+            string email3 = driver.FindElement(By.Name("email3")).GetAttribute("value");
+            string homepage = driver.FindElement(By.Name("homepage")).GetAttribute("value");
+            string address2 = driver.FindElement(By.Name("address2")).GetAttribute("value");
+            string notes = driver.FindElement(By.Name("notes")).GetAttribute("value");
+
+
 
 
             return new ContactData(lastname, firstname)
-            {
+            {           
+            AllInfo = firstname + middlename + lastname + nickname + title + company + 
+            address + homePhone + mobilePhone + workPhone + fax + email + email2 + email3 + homepage + address2 + phone2 + notes,
                 Address = address,
                 Home = homePhone,
                 Mobile = mobilePhone,
                 Work = workPhone,
-                Phone2 = phone2
+                Phone2 = phone2,
+                Nickname = nickname,
+                Company = company,
+                Title = title,
+                Fax = fax,
+                Email = email,
+                Email2 = email2,
+                Email3 = email3,
+                Homepage = homepage,
+                Notes = notes
             };
 
         }

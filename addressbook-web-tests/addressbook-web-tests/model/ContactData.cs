@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -15,6 +16,10 @@ namespace WebAddressbookTests
         {
             Lastname = lastname;
             Firstname = firstname;          
+        }
+        public ContactData()
+        {
+            
         }
         public bool Equals(ContactData other)
         {
@@ -186,7 +191,7 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return (CleanUp(Home) + CleanUp(Mobile) + CleanUp(Work) + CleanUp(Phone2)).Trim();
+                    return (CleanUpPhone(Home) + CleanUpPhone(Mobile) + CleanUpPhone(Work) + CleanUpPhone(Phone2)).Trim();
                 }
             }
 
@@ -196,8 +201,28 @@ namespace WebAddressbookTests
             }
 
         }
-
-        public string CleanUp(string phone)
+        public string allInfo;
+        public string AllInfo
+        {
+            get 
+            {
+                if (allInfo != null)
+                {
+                    return allInfo.Replace(" ", "").Replace("\r\n", "").Replace("H:", "").Replace("M:", "").Replace("W:", "").Replace("F:", "").Replace("Homepage:", "").Replace("P:", "");
+                }
+                else
+                {
+                    return Firstname.Trim() + Middlename.Trim() + Lastname + Nickname + Title + Company
+                        + Address + Home + Mobile + Work + Fax + Email + Email2 + Email3 + Homepage + Address2 + Phone2 + Notes;
+                }
+                
+            }
+            set
+            {
+                allInfo = value;
+            }
+        }
+        public string CleanUpPhone(string phone)
         {
             if (phone == null || phone == "") 
             {

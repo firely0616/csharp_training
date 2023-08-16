@@ -28,13 +28,7 @@ namespace WebAddressbookTests.tests
             contact.Email = "testUpdate";
             contact.Email2 = "testUpdate";
             contact.Email3 = "testUpdate";
-            contact.Homepage = "testUpdate";
-            contact.Bday = "15";
-            contact.Bmonth = "December";
-            contact.Byear = "2001";
-            contact.Aday = "11";
-            contact.Amonth = "November";
-            contact.Ayear = "1999";
+            contact.Homepage = "testUpdate";          
             contact.Address2 = "testUpdate";
             contact.Phone2 = "testUpdate";
             contact.Notes = "testUpdate";
