@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -12,13 +13,23 @@ namespace WebAddressbookTests.tests
     [TestFixture]
     public class GroupCreationTests : AuthTestBase
     {
-    
-        [Test]
-        public void GroupCreationTest()
+        public static IEnumerable<GroupData> RandomDataProvider() 
         {
-            GroupData group = new GroupData("test name");            
-            group.Header = "test header";
-            group.Footer = "test footer";
+            List<GroupData> groups = new List<GroupData>();
+            for (int i = 0; i < 5; i++)
+            {
+                groups.Add(new GroupData (GenerateRandomString(30))
+                    {
+                    Header = GenerateRandomString(30),
+                    Footer = GenerateRandomString(30)
+                    });
+            }
+            return groups;  
+        }
+
+        [Test, TestCaseSource("RandomDataProvider")]
+        public void GroupCreationTest(GroupData group)
+        {
             List<GroupData> oldGroups = app.Group.GetGroupList();
             app.Group.Create(group);
             app.Navigator.ReturnToGroupsPage();
