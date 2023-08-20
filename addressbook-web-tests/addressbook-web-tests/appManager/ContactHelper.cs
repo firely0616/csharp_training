@@ -76,10 +76,10 @@ namespace WebAddressbookTests
         {
             manager.Navigator.GoToHomePage();
             GoToContactDetails(index);
-            string info = driver.FindElement(By.XPath("//div[@id = 'content']")).Text;
+            string allInfo = driver.FindElement(By.XPath("//div[@id = 'content']")).Text;
             return new ContactData()
             {
-                AllInfo = info
+                AllInfo = allInfo
             };
         }
 
@@ -126,9 +126,9 @@ namespace WebAddressbookTests
 
 
             return new ContactData(lastname, firstname)
-            {           
-            AllInfo = firstname + middlename + lastname + nickname + title + company + 
-            address + homePhone + mobilePhone + workPhone + fax + email + email2 + email3 + homepage + address2 + phone2 + notes,
+            {
+
+                Middlename= middlename,
                 Address = address,
                 Home = homePhone,
                 Mobile = mobilePhone,
@@ -141,6 +141,7 @@ namespace WebAddressbookTests
                 Email = email,
                 Email2 = email2,
                 Email3 = email3,
+                Address2 = address2,
                 Homepage = homepage,
                 Notes = notes
             };

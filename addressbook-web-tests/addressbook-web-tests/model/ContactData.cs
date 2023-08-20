@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Security.Policy;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using NUnit.Framework;
+using OpenQA.Selenium.Remote;
 
 namespace WebAddressbookTests
 {
@@ -201,21 +204,35 @@ namespace WebAddressbookTests
             }
 
         }
-        public string allInfo;
+        public string allInfo = null;
         public string AllInfo
         {
             get 
             {
-                if (allInfo != null)
+                if (allInfo == null)
                 {
-                    return allInfo.Replace(" ", "").Replace("\r\n", "").Replace("H:", "").Replace("M:", "").Replace("W:", "").Replace("F:", "").Replace("Homepage:", "").Replace("P:", "");
+                    if (Firstname != null) { allInfo += Firstname; }
+                    if (Middlename != null) { allInfo += " " + Middlename + " "; }
+                    if (Lastname != null) { allInfo += Lastname; }
+                    if (Nickname != null) { allInfo += Nickname; }
+                    if (Title != null) { allInfo += Title; }
+                    if (Company != null) { allInfo += Company; }
+                    if (Address != null) { allInfo += Address; }
+                    if (Home != null) { allInfo += Home; }
+                    if (Mobile != null) { allInfo += Mobile; }
+                    if (Work != null) { allInfo += Work; }
+                    if (Fax != null) { allInfo += Fax; }
+                    if (Email != null) { allInfo += Email; }
+                    if (Email2 != null) { allInfo += Email2; }
+                    if (Email3 != null) { allInfo += Email3; }
+                    if (Homepage != null) { allInfo += Homepage; }
+                    if (Address2 != null) { allInfo += Address2; }
+                    if (Phone2 != null) { allInfo += Phone2; }
+                    if (Notes != null) { allInfo += Notes; }
+
+                    return allInfo;
                 }
-                else
-                {
-                    return Firstname.Trim() + Middlename.Trim() + Lastname + Nickname + Title + Company
-                        + Address + Home + Mobile + Work + Fax + Email + Email2 + Email3 + Homepage + Address2 + Phone2 + Notes;
-                }
-                
+                return CleanUpInfo(allInfo);                       
             }
             set
             {
@@ -229,6 +246,14 @@ namespace WebAddressbookTests
                 return "";
             }
             return Regex.Replace(phone, "[ -()]", "") + "\r\n";
+        }
+        public string CleanUpInfo(string info)
+        {
+            if (info == null || info == "")
+            {
+                return "";
+            }
+            return info.Replace("\r\n", "").Replace("H: ", "").Replace("M: ", "").Replace("W: ", "").Replace("F: ", "").Replace("P: ","").Replace("Homepage:","");
         }
 
 
