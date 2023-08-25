@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using Newtonsoft.Json;
+using System.Xml.Serialization;
 using NUnit.Framework;
 
 
@@ -35,7 +38,35 @@ namespace WebAddressbookTests.tests
             }
             return contacts;
         }
-        [Test, TestCaseSource("RandomDataProvider")]
+
+        public static IEnumerable<ContactData> ContactDataFromCsvFile()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            string[] lines = File.ReadAllLines(@"contacts.csv");
+            foreach (string line in lines)
+            {
+                string[] parts = line.Split(',');
+                contacts.Add(new ContactData(parts[0], parts[1])
+                {
+                    Middlename = parts[3],
+                    Nickname = parts[4],
+                    Company = parts[5],
+                    Address = parts[6]
+                });
+            }
+            return contacts;
+        }
+        public static IEnumerable<ContactData> ContactDataFromXmlFile()
+        {
+            return (List<ContactData>)new XmlSerializer(typeof(List<ContactData>)).Deserialize(new StreamReader(@"contacts.xml"));
+        }
+        public static IEnumerable<ContactData> ContactDataFromJsonFile()
+        {
+            return JsonConvert.DeserializeObject<List<ContactData>>(File.ReadAllText(@"contacts.json"));
+        }
+
+
+        [Test, TestCaseSource("ContactDataFromJsonFile")]
         public void ContactCreationTest(ContactData contact)
         {
 
