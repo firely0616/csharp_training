@@ -212,22 +212,37 @@ namespace WebAddressbookTests
                 if (allInfo == null)
                 {
                     if (Firstname != null && Firstname != "")  allInfo += Firstname; 
-                    if (Middlename != null && Middlename != "")  allInfo += " " + Middlename + " "; 
-                    if (Lastname != null && Lastname != "") allInfo += Lastname;
+                    if (Middlename != null && Middlename != "")  allInfo += " " + Middlename; 
+                    if (Lastname != null && Lastname != "") allInfo += " " + Lastname;
+
                     if (Nickname != null && Nickname != "") allInfo += "\r\n" + Nickname ;
-                    if (Title != null && Title != "") allInfo += "\r\n" +Title;
+
+                    if (Title != null && Title != "") allInfo += "\r\n" + Title;
+
                     if (Company != null && Company != "") allInfo += "\r\n" + Company;
-                    if (Address != null && Address != "") allInfo += "\r\n" + Address; 
-                    if (Home != null && Home != "") allInfo += "\r\n\r\n" + "H: " + Home;
-                    if (Mobile != null && Mobile != "") allInfo +="\r\n" + "M: " + Mobile;
+
+                    if (Address != null && Address != "") allInfo += "\r\n" + Address;
+
+                    if (Home != null && Home != "") allInfo += "\r\n\r\n" + "H: " + Home; else allInfo += "\r\n";
+
+                    if (Mobile != null && Mobile != "") allInfo +="\r\nM: " + Mobile;
+
                     if (Work != null && Work != "") allInfo += "\r\n" + "W: " + Work;
+
                     if (Fax != null && Fax != "") allInfo += "\r\n" + "F: " + Fax ;
+
                     if (Email != null && Email != "") allInfo += "\r\n\r\n" + Email;
+
                     if (Email2 != null && Email2 != "") allInfo += "\r\n" + Email2 ;
+
                     if (Email3 != null && Email3 != "") allInfo += "\r\n" + Email3 ;
+
                     if (Homepage != null && Homepage != "") allInfo += "\r\n" + "Homepage:\r\n" + Homepage;
+
                     if (Address2 != null && Address2 != "") allInfo += "\r\n\r\n\r\n" + Address2 ;
+
                     if (Phone2 != null && Phone2 != "") allInfo += "\r\n\r\n" + "P: " + Phone2;
+
                     if (Notes != null && Notes != "")  allInfo += "\r\n\r\n" + Notes;
 
                     return allInfo;
