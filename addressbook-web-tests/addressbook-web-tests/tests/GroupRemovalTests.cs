@@ -8,16 +8,17 @@ using NUnit.Framework;
 namespace WebAddressbookTests.tests
 {
     [TestFixture]
-    public class GroupRemovalTests : AuthTestBase
+    public class GroupRemovalTests : GroupTestBase
     {
         [Test]
         public void GroupRemovalTest() { 
 
             app.Navigator.GoToGroupsPage();
-            List<GroupData> oldGroups = app.Group.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAll();                       
             if (app.Group.IsGroupPresent())
             {
-                app.Group.Remove(1);
+                GroupData toBeRemoved = oldGroups[0];
+                app.Group.Remove(toBeRemoved);
             }
             else 
             {
@@ -26,7 +27,8 @@ namespace WebAddressbookTests.tests
                 groupForRemove.Footer = "test footer";
                 app.Group.Create(groupForRemove);
                 app.Navigator.ReturnToGroupsPage();
-                app.Group.Remove(1);
+                oldGroups = GroupData.GetAll();
+                app.Group.Remove(groupForRemove);
             }          
             app.Navigator.ReturnToGroupsPage();
             if (oldGroups.Count<=0)
@@ -37,11 +39,12 @@ namespace WebAddressbookTests.tests
             {
                 Assert.AreEqual(oldGroups.Count - 1, app.Group.GetGroupCount());
             }
-            List<GroupData> newGroups = app.Group.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAll();
             if (oldGroups.Count>0)
             {
                 oldGroups.RemoveAt(0);
-            }          
+            } 
+            
             Assert.AreEqual(oldGroups, newGroups);
 
         }

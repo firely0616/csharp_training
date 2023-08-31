@@ -136,6 +136,8 @@
     <Compile Include="tests\GroupCreationTests.cs" />
     <Compile Include="tests\GroupModifacationTests.cs" />
     <Compile Include="tests\GroupRemovalTests.cs" />
+    <Compile Include="tests\ContactTestBase.cs" />
+    <Compile Include="tests\GroupTestBase.cs" />
     <Compile Include="tests\LoginTests.cs" />
     <Compile Include="tests\TestBase.cs" />
   </ItemGroup>

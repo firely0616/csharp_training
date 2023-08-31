@@ -68,5 +68,12 @@ namespace WebAddressbookTests
         {
             return "name = " + Name;
         }
+        public static List<GroupData> GetAll()
+        {
+            using (AddressBookDB db = new AddressBookDB()) 
+            {
+            return (from g in db.Groups select g).ToList();           
+            }
+        }
     }
 }

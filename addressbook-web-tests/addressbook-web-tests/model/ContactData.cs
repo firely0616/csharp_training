@@ -6,11 +6,13 @@ using System.Security.Policy;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using LinqToDB.Mapping;
 using NUnit.Framework;
 using OpenQA.Selenium.Remote;
 
 namespace WebAddressbookTests
 {
+    [Table(Name = "addressbook")]
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
         public string allPhones;
@@ -61,124 +63,153 @@ namespace WebAddressbookTests
                 return -1;
             }
         }
-
+        [Column(Name = "id"), PrimaryKey, Identity]
+        public string Id
+        {
+            get; set;
+        }
+        [Column(Name = "firstname")]
         public string Firstname
         {
             get; set;
         }
+
         public string Photo
         {
             get; set;
 
         }
+        [Column(Name = "homepage")]
         public string Homepage
         {
             get; set;
 
         }
+        [Column(Name = "email")]
         public string Email
         {
             get; set;
 
         }
+        [Column(Name = "email2")]
         public string Email2
         {
             get; set;
 
         }
+        [Column(Name = "email3")]
         public string Email3
         {
             get; set;
 
         }
+        [Column(Name = "work")]
         public string Work
         {
             get; set;
 
         }
+        [Column(Name = "fax")]
         public string Fax
         {
             get; set;
 
         }
+        [Column(Name = "mobile")]
         public string Mobile
         {
             get; set;
 
         }
+        [Column(Name = "middlename")]
         public string Middlename
         {
             get; set;
 
         }
+        [Column(Name = "nickname")]
         public string Nickname
         {
             get; set;
 
         }
+        [Column(Name = "lastname")]
         public string Lastname
         {
             get; set;
 
         }
+        [Column(Name = "title")]
         public string Title
         {
             get; set;
         }
+        [Column(Name = "company")]
         public string Company
         {
             get; set;
 
         }
+        [Column(Name = "address")]
         public string Address
         {
             get; set;
 
         }
+        [Column(Name = "home")]
         public string Home {
             get; set;
 
         }
+        [Column(Name = "bday")]
         public string Bday
         {
             get; set;
 
         }
+        [Column(Name = "bmonth")]
         public string Bmonth
         {
             get; set;
 
         }
+        [Column(Name = "byear")]
         public string Byear
         {
             get; set;
 
         }
+        [Column(Name = "aday")]
         public string Aday
         {
             get; set;
 
         }
+        [Column(Name = "amonth")]
         public string Amonth
         {
             get; set;
 
         }
+        [Column(Name = "ayear")]
         public string Ayear
         {
             get; set;
 
         }
+        [Column(Name = "address2")]
         public string Address2
         {
             get; set;
 
         }
+        [Column(Name = "phone2")]
         public string Phone2
         {
             get; set;
 
         }
+        [Column(Name = "notes")]
         public string Notes
         {
             get; set;
@@ -261,6 +292,13 @@ namespace WebAddressbookTests
                 return "";
             }
             return Regex.Replace(phone, "[ -()]", "") + "\r\n";
+        }
+        public static List<ContactData> GetAll()
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                return (from g in db.Contacts select g).ToList();
+            }
         }
     }
 }

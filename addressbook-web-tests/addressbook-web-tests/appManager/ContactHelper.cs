@@ -35,7 +35,14 @@ namespace WebAddressbookTests
                 SubmitContactRemove();
                 return this;       
         }
-      
+        public ContactHelper Remove(ContactData contact)
+        {
+
+            SelectContact(contact.Id);
+            SubmitContactRemove();
+            return this;
+        }
+
         public void SubmitContactRemove()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
@@ -48,6 +55,13 @@ namespace WebAddressbookTests
                 FillContactForm(contact);
                 SubmitContactModificate();
                 return this;         
+        }
+        public ContactHelper Modificate(ContactData contact, ContactData contactModificate)
+        {
+            SelectContactForModificate(contact.Id);
+            FillContactForm(contactModificate);
+            SubmitContactModificate();
+            return this;
         }
         public void SubmitContactModificate()
         {
@@ -177,9 +191,19 @@ namespace WebAddressbookTests
         {
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + contactId + "]")).Click();
         }
+        public ContactHelper SelectContact(String id)
+        {
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='"+id+"'])")).Click();
+            return this;
+        }
         public void SelectContactForModificate(int contactId)
         {
             driver.FindElement(By.XPath("(//form[@name='MainForm']//img[@title='Edit'])[" + contactId + "]")).Click();
+        }
+        public ContactHelper SelectContactForModificate(String id)
+        {
+            driver.FindElement(By.XPath("//input[@name='selected[]' and @value='"+id+ "']/ancestor::tr//img[@title='Edit']")).Click();
+            return this;
         }
         public ContactHelper FillContactForm(ContactData contact)
         {
@@ -203,10 +227,6 @@ namespace WebAddressbookTests
             Type(By.Name("notes"), contact.Notes);
             Type(By.Name("byear"), contact.Byear);
             Type(By.Name("ayear"), contact.Ayear);
-            //TypeDate(By.Name("bday"), contact.Bday);
-            //TypeDate(By.Name("bmonth"), contact.Bmonth);
-            //TypeDate(By.Name("aday"), contact.Aday);
-            //TypeDate(By.Name("amonth"), contact.Amonth);
             return this;
 
         }
