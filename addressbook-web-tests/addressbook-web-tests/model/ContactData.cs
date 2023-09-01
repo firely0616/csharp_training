@@ -60,7 +60,7 @@ namespace WebAddressbookTests
             }
             else
             {
-                return -1;
+                return Lastname.CompareTo(other.Lastname);
             }
         }
         [Column(Name = "id"), PrimaryKey, Identity]

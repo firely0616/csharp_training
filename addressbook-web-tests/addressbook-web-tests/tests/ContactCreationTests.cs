@@ -75,6 +75,7 @@ namespace WebAddressbookTests.tests
             app.Navigator.ReturnToHomePage();
             Assert.AreEqual(oldContacts.Count+1, app.Contact.GetContactCount());
             List<ContactData> newContacts = ContactData.GetAll();
+            oldContacts.Add(contact);
             oldContacts.Sort();
             newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);
