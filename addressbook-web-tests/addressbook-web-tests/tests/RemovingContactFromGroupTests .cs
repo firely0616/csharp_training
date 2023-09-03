@@ -46,13 +46,6 @@ namespace WebAddressbookTests
             oldList.Sort();
             newList.Sort();
             Assert.AreEqual(oldList, newList);
-
-
-
-
-
-
-
         }
     }
 }
