@@ -45,7 +45,7 @@ namespace WebAddressbookTests
                 count++;
                 if (count == groupList.Count())
                 {
-                    app.Contact.Create(new ContactData("test12", "test12"));
+                    app.Contact.Create(new ContactData("test1", "test1"));
                     contactList = ContactData.GetAll();
                     ContactData contact = contactList.Except(contactsInGroup).First();
                     List<ContactData> oldList = g.GetContacts();
