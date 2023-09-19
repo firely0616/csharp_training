@@ -29,7 +29,7 @@ namespace mantis_tests
             baseURL = "http://localhost/mantisbt-1.3.20/login_page.php";
             verificationErrors = new StringBuilder();
             Registration = new RegistrationHelper(this);
-            Ftp = new FtpHelper(this);
+//            Ftp = new FtpHelper(this);
             loginHelper = new LoginHelper(this);
             projectHelper = new ProjectHelper(this);
             navigationHelper = new NavigationHelper(this, baseURL);
@@ -101,7 +101,7 @@ namespace mantis_tests
         {
             get
             {
-                return api;
+                return apiHelper;
             }
         }
 
